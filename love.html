@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>you are beatiful!</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-color: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+        canvas {
+            position: absolute;
+        }
+        .text {
+            position: absolute;
+            color: white;
+            font-size: 1.5vw;
+            font-family: 'Dancing Script', cursive;
+            text-shadow: 3px 5px 10px rgba(255, 255, 255, 0.8);
+            user-select: none;
+            margin-left: 40px;
+            margin-right: 40px;
+            cursor: pointer; /* Это сделает курсор вида "указатель" при наведении */
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+    <div class="text">Солнышко мое, ты самая лучшая!
+        <br>
+        Спасибо тебе за то что ты всё ещё со мной, спасибо за всё ♥ <br>
+        Ты самый дорогой человек для меня, вот серьезно, дороже тебя никого нет, я хочу остаться с тобой на всю всю всю жизнь, прости меня за то что я тебя иногда обижаю, делаю больно, я не хочу тебе боли, я хочу чтобы ты была счастлива, хочу чтобы у тебя всё было хорошо. Так хочется оказаться рядом с тобой, иметь возможность дотронуться до тебя, обнять... Я мечтаю встретиться с тобой. я счастлив с тобой, ведь ты и есть мое счастье ♥ я зависим от тебя, если тебе плохо, мне не может быть хорошо, я всегда очень переживаю за тебя, ты единственная кого я хочу видеть, самая родная, самая прекрасная, самая лучшая, самая красивая, самая милая. <br> Если бы у меня был обязательный выбор, спасти тебя или весь мир, я выберу тебя ♥
+        <br> Котеночек мой ♥ <br> мы пройдем через все трудности, через все преграды и останемся вместе, мы будем жить счастливо, всё будет хорошо. Я тобой очень горжусь ♥ <br> я в тебя верю ♥ <br> помни, котеночек мой, ты шикарная ♥
+
+
+
+
+
+
+
+
+
+    </div>
+
+    <script>
+        const canvas = document.getElementById("canvas");
+        const ctx = canvas.getContext("2d");
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener("resize", resizeCanvas);
+        resizeCanvas();
+
+        const particles = [];
+        const particleCount = Math.max(100, canvas.width / 10);
+
+        function createParticles() {
+            particles.length = 0;
+            for (let i = 0; i < particleCount; i++) {
+                particles.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    size: Math.random() * 3 + 1,
+                    speed: Math.random() * 3 + 1,
+                    alpha: Math.random() * 0.8 + 0.2
+                });
+            }
+        }
+        createParticles();
+
+        function update() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Двигаем частицы вверх
+            particles.forEach(p => {
+                p.y -= p.speed;
+                if (p.y < 0) {
+                    p.y = canvas.height;
+                    p.x = Math.random() * canvas.width;
+                }
+                ctx.globalAlpha = p.alpha;
+                ctx.fillStyle = "rgba(255, 255, 255, 0.5)";
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                ctx.fill();
+            });
+
+            requestAnimationFrame(update);
+        }
+
+        update();
+    </script>
+</body>
+</html>
