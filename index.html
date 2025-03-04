@@ -18,22 +18,37 @@
         canvas {
             position: absolute;
         }
-        .text {
+        .text-container {
             position: absolute;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .text {
             color: white;
             font-size: 5vw;
             font-family: 'Dancing Script', cursive;
             text-shadow: 3px 5px 10px rgba(255, 255, 255, 0.8);
             user-select: none;
-            cursor: pointer; /* Это сделает курсор вида "указатель" при наведении */
         }
-        
+
+        .small {
+            font-size: 3vw;
+            margin-top: 10px;
+            cursor: pointer;
+        }
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
 </head>
 <body>
     <canvas id="canvas"></canvas>
-    <a href="love.html" target="_blank" class="text">С 8 марта! <br>       нажми</a>
+    
+    <a href="love.html" target="_blank" class="text-container">
+        <span class="text">С 8 марта!</span>
+        <span class="text small">нажми</span>
+    </a>
 
     <script>
         const canvas = document.getElementById("canvas");
